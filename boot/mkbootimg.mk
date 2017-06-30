@@ -22,6 +22,7 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(BOOTIM
 	$(hide) $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $@
 	$(hide) $(call assert-max-image-size,$@,$(BOARD_BOOTIMAGE_PARTITION_SIZE),raw)
 	@echo "Made boot image: $@"
+	$(hide) mkdir -p $(PRODUCT_OUT)/recovery/root
 	$(hide) rm $(PRODUCT_OUT)/root/initlogo.rle
 	$(hide) cp $(LOCAL_PATH)/../logo/initlogo_recovery.rle $(PRODUCT_OUT)/recovery/root/initlogo.rle
 
