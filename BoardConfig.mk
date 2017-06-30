@@ -19,7 +19,7 @@
 DEVICE_PATH := device/nokia/fame
 
 # OTA assert
-TARGET_OTA_ASSERT_DEVICE := fame,fame_cmcc,fame_lta,fame_tmo
+TARGET_OTA_ASSERT_DEVICE := fame,fame_cmcc,fame_lta,fame_tmo,glee,glee_cmcc
 
 # Board device headers
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
