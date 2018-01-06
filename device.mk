@@ -43,7 +43,10 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
-    tinymix
+    tinymix \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl
+    
 
 # Audio properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -57,6 +60,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.fluencetype=fluence
 
 # Bluetooth configurations
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh
 
@@ -78,7 +84,19 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8960 \
     gralloc.msm8960 \
     copybit.msm8960 \
-    memtrack.msm8960
+    memtrack.msm8960 \
+    libgenlock \
+    liboverlay \
+    libfimg \
+    libhwc2on1converter
+
+#Display Hal
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.memtrack@1.0-impl 
 
 # Display properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -91,7 +109,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # DRM packages
 PRODUCT_PACKAGES += \
-    com.google.widevine.software.drm
+    com.google.widevine.software.drm \
+    android.hardware.drm@1.0-impl
 
 # DRM properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -123,7 +142,8 @@ PRODUCT_PACKAGES += \
     gps.msm8960 \
     gps.conf \
     sap.conf \
-    izat.conf
+    izat.conf \
+    android.hardware.gnss@1.0-impl
 
 # Hardware configurations
 PRODUCT_COPY_FILES += \
@@ -154,10 +174,16 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/pmic8xxx_pwrkey.kcm:system/usr/keychars/pmic8xxx_pwrkey.kcm \
     $(LOCAL_PATH)/configs/pmic8xxx_pwrkey.kl:system/usr/keylayout/pmic8xxx_pwrkey.kl
 
+#Keymaster
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service
+
 # Lights package
 PRODUCT_PACKAGES += \
     lights.msm8960 \
-    sensors.msm8960
+    sensors.msm8960 \
+    android.hardware.power@1.0-impl
 
 # Logo
 # There is a weird hack we have to do because certian stuff in root gets copied over top of 
@@ -187,6 +213,9 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     libstagefrighthw
 
+PRODUCT_PROPERTY_OVERRRIDES += \
+    persist.media.treble_omx=false
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -207,7 +236,9 @@ PRODUCT_COPY_FILES += \
 
 # PowerHAL
 PRODUCT_PACKAGES += \
-    power.qcom
+    power.qcom \
+    android.hardware.power@1.0-impl
+
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=libqti-perfd-client.so
 
@@ -220,6 +251,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ril.subscription.types=NV,RUIM \
     telephony.lteOnCdmaDevice=0 \
     ro.telephony.call_ring.multiple=0
+
+#Sensors
+PRODUCT_PACKAGES += \
+    android.hardware.sensor@1.0-impl \
+    android.hardware.vibraot@1.0-impl
 
 # Thermal throttling
 PRODUCT_COPY_FILES += \

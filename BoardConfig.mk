@@ -15,6 +15,10 @@
 # limitations under the License.
 #
 
+# ADB Legacy Interface
+TARGET_USES_LEGACY_ADB_INTERFACE := true
+
+
 # Board device path
 DEVICE_PATH := device/nokia/fame
 
@@ -34,7 +38,7 @@ TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_VARIANT := krait
+TARGET_CPU_VARIANT := generic
 
 # Kernel source / bootimg info
 TARGET_KERNEL_SOURCE := kernel/nokia/msm8x27
@@ -49,10 +53,9 @@ BOARD_KERNEL_CMDLINE := panic=3 \
     msm_rtb.filter=0x3F \
     ehci-hcd.park=3 \
     androidboot.bootdevice=msm_sdcc.1
-ifeq ($(TARGET_BUILD_VARIANT),eng)
-# set selinux permissive if it's an eng build
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-endif
+
+BOARD_KERNEL_IMAGE_NAME := Image
 
 # Audio configurations
 BOARD_USES_ALSA_AUDIO := true
@@ -92,7 +95,10 @@ QCOM_FM_ENABLED := true
 BOARD_HAVE_QCOM_FM := true
 
 # Hardware Class
-BOARD_HARDWARE_CLASS := $(DEVICE_PATH)/cmhw
+BOARD_HARDWARE_CLASS := $(DEVICE_PATH)/lineagehw
+
+#HIDL
+DEVICE_MANIFEST_FILE := $(LOCAL_DIR)/manifest.xml
 
 # Healthd
 BOARD_CHARGER_ENABLE_SUSPEND := true
@@ -128,9 +134,9 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/fstab.qcom
 BOARD_RIL_CLASS := ../../../$(DEVICE_PATH)/ril/
 
 # SELinux Policy
-include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += \
-    $(DEVICE_PATH)/sepolicy
+#include device/qcom/sepolicy/sepolicy.mk
+#BOARD_SEPOLICY_DIRS += \
+#    $(DEVICE_PATH)/sepolicy
 
 # Vendor
 BOARD_VENDOR := nokia
